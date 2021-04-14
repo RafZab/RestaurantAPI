@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -15,7 +16,7 @@ namespace RestaurantAPI.Entities
         public string ContactEmail { get; set; }
         public string ContactNumber { get; set; }
 
-        public int AdressId { get; set; }
+        public int AddressId { get; set; }
         public virtual Address Address { get; set; }
 
         public List<Dish> Dishes { get; set; }
