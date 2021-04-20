@@ -1,15 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
 
 namespace RestaurantAPI.Entities
 {
     public class RestaurantDbContext : DbContext
     {
         private string _conectionContext =
-            "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog = RestaurantDb; Integrated Security = True;";
+            "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=RestaurantDb;Integrated Security=True;";
 
         public DbSet<Restaurant> Restaurants { get; set; }
         public DbSet<Dish> Dishes { get; set; }

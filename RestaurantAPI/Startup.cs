@@ -26,8 +26,6 @@ namespace RestaurantAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // Chcemy aby doda³ nam interface IWether... z klasy WeatherForecastServoce
-            services.AddTransient<IWeatherForecastService, WeatherForecastService>();
             services.AddControllers();
             services.AddDbContext<RestaurantDbContext>();
             services.AddScoped<RestaurantSeeder>();

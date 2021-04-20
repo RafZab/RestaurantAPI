@@ -19,7 +19,7 @@ namespace RestaurantAPI
         {
             if (_dbContext.Database.CanConnect()) // sprawdza czy mozna połaczyc sie z baza danych.
             {
-                if (_dbContext.Restaurants.Any()) // SPRawdza czy cos jest w tabeli.
+                if (!_dbContext.Restaurants.Any()) // SPRawdza czy cos jest w tabeli.
                 {
                     var restaurants = GetRestaurant();
                     _dbContext.Restaurants.AddRange(restaurants);
