@@ -10,6 +10,7 @@ using System.Linq;
 namespace RestaurantAPI.Controllers
 {
     [Route("api/restaurant")]
+    [ApiController] // sprawdza czy się waliduje. 
     public class RestaurantController : ControllerBase
     {
         private readonly RestaurantService _restaurantService;
@@ -21,32 +22,22 @@ namespace RestaurantAPI.Controllers
         [HttpPut("{id}")]
         public ActionResult UpdateRestaurant([FromRoute] int id, [FromBody] UpdateRestaurantDto dto)
         {
-            if(!ModelState.IsValid)
-                return BadRequest(ModelState);
-
-            var isUpdate = _restaurantService.Update(id, dto);
+            _restaurantService.Update(id, dto);
             
-            if (!isUpdate)
-                return NotFound();
             return Ok();
         }
 
         [HttpDelete("{id}")]
         public ActionResult DelateRestaurant([FromRoute] int id)
         {
-            var isDelated = _restaurantService.Delate(id);
+            _restaurantService.Delate(id);
 
-            if (!isDelated)
-                return NotFound();
             return NoContent();
         }
 
         [HttpPost]
         public ActionResult CreateRestaurant([FromBody] CreateRestaurantDto dto)
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
             var id = _restaurantService.Create(dto);
 
             return Created($"api/restaurant/{id}", null);
@@ -64,8 +55,6 @@ namespace RestaurantAPI.Controllers
         {
             var restaurant = _restaurantService.GetById(id);
             
-            if (restaurant is null)
-                return NotFound();
             return restaurant;
         }
 
