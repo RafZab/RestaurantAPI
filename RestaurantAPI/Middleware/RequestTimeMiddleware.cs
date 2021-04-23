@@ -30,9 +30,9 @@ namespace RestaurantAPI.Middleware
             if(requestTime / 1000 > 4)
             {
                 var message =
-                    $"Request [{context.Request.Method} at {context.Request.Path} took {requestTime} ms";
+                    $"Request [{context.Request.Method}] at {context.Request.Path} took {requestTime} ms";
 
-                _logger.LogTrace(message);
+                _logger.LogInformation(message);
             }
         }
     }
