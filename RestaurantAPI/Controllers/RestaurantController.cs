@@ -13,8 +13,8 @@ namespace RestaurantAPI.Controllers
     [ApiController] // sprawdza czy się waliduje. 
     public class RestaurantController : ControllerBase
     {
-        private readonly RestaurantService _restaurantService;
-        public RestaurantController(RestaurantService restaurantService)
+        private readonly IRestaurantService _restaurantService;
+        public RestaurantController(IRestaurantService restaurantService)
         {
             _restaurantService = restaurantService;
         }
