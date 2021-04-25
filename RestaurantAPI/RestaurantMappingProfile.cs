@@ -25,6 +25,8 @@ namespace RestaurantAPI
                            { City = dto.City, Street = dto.Street, PostalCode = dto.PostalCode}));
 
             CreateMap<CreateDishDto, Dish>();
+
+            CreateMap<RegisterUserDto, User>();
         }
     }
 }
