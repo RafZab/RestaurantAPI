@@ -61,6 +61,9 @@ namespace RestaurantAPI
 
             services.AddScoped<IAuthorizationHandler, ResourceOperationRequirementHandler>();
 
+            services.AddScoped<IUserContextService, UserContextService>();
+            services.AddHttpContextAccessor();
+
             services.AddControllers().AddFluentValidation();
             services.AddDbContext<RestaurantDbContext>();
             services.AddScoped<RestaurantSeeder>();
