@@ -1,4 +1,5 @@
-﻿using RestaurantAPI.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using RestaurantAPI.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,10 @@ namespace RestaurantAPI
         {
             if (_dbContext.Database.CanConnect()) // sprawdza czy mozna połaczyc sie z baza danych.
             {
+                var pendingMigrations = _dbContext.Database.GetPendingMigrations();
+                if (pendingMigrations != null && pendingMigrations.Any()) // sprawdza czy są nowe migracje
+                    _dbContext.Database.Migrate();
+
                 if (!_dbContext.Roles.Any())
                 {
                     var roles = GetRoles();
