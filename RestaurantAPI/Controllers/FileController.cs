@@ -11,9 +11,11 @@ using System.Threading.Tasks;
 namespace RestaurantAPI.Controllers
 {
     [Route("file")]
-    [Authorize]
+   // [Authorize]
     public class FileController : ControllerBase
     {
+        [HttpGet]
+        [ResponseCache(Duration = 1200, VaryByQueryKeys = new[] { "fileName" })]
         public ActionResult GetFile([FromQuery] string fileName)
         {
             var rootPath = Directory.GetCurrentDirectory();
@@ -32,6 +34,7 @@ namespace RestaurantAPI.Controllers
             return File(fileContents, contentType, fileName);
         }
 
+        [HttpPost]
         public ActionResult Upload([FromForm] IFormFile file)
         {
             if (file != null && file.Length > 0)
