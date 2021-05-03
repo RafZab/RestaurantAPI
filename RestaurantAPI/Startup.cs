@@ -62,14 +62,13 @@ namespace RestaurantAPI
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("HasNationality", builder => builder.RequireClaim("Nationality", "German", "Polish"));
+                options.AddPolicy("AtLeast20", builder => builder.AddRequirements(new MinimumAgeRequirement(20)));
                 options.AddPolicy("CreatedAtlest2Restaurant", builder => builder.AddRequirements(new CreatedMultipleRestaurantRequirement(2)));
             });
 
+            services.AddScoped<IAuthorizationHandler, MinimumAgeRequirementHandler>();
             services.AddScoped<IAuthorizationHandler, CreatedMultipleRestaurantRequirementHandler>();
             services.AddScoped<IAuthorizationHandler, ResourceOperationRequirementHandler>();
-
-            services.AddScoped<IUserContextService, UserContextService>();
-            services.AddHttpContextAccessor();
 
             services.AddControllers().AddFluentValidation();
             services.AddDbContext<RestaurantDbContext>();
@@ -83,9 +82,13 @@ namespace RestaurantAPI
             services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 
             services.AddScoped<IValidator<RegisterUserDto>, RegisterUserDtoValidator>();
+            services.AddScoped<IValidator<RestaurantQuery>, RestaurantQueryValidator>();
 
             services.AddScoped<ErrorHandlingMiddleware>();
             services.AddScoped<RequestTimeMiddleware>();
+
+            services.AddScoped<IUserContextService, UserContextService>();
+            services.AddHttpContextAccessor();
 
             services.AddSwaggerGen();
         }

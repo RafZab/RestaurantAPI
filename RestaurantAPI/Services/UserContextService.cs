@@ -15,12 +15,13 @@ namespace RestaurantAPI.Services
 
     public class UserContextService : IUserContextService
     {
-        HttpContextAccessor _httpContextAccessor;
-        public UserContextService(HttpContextAccessor httpContextAccessor)
+        private readonly IHttpContextAccessor _httpContextAccessor;
+
+        public UserContextService(IHttpContextAccessor httpContextAccessor)
         {
             _httpContextAccessor = httpContextAccessor;
         }
-        // znak zapytania sprawdza czy user nie jest nulem czyli nie jest zalogowany
+        // znak zapytania jest po to aby działo to dal osób które nie są zalogowane.
         public ClaimsPrincipal User => _httpContextAccessor.HttpContext?.User;
 
         public int? GetUserId =>
