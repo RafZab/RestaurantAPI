@@ -5,8 +5,7 @@ namespace RestaurantAPI.Entities
 {
     public class RestaurantDbContext : DbContext
     {
-        private string _conectionContext =
-            "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=RestaurantDb;Integrated Security=True;";
+        public RestaurantDbContext(DbContextOptions<RestaurantDbContext> options) : base(options) { }
 
         public DbSet<Restaurant> Restaurants { get; set; }
         public DbSet<Dish> Dishes { get; set; }
@@ -44,11 +43,6 @@ namespace RestaurantAPI.Entities
                 .Property(u => u.Email)
                 .IsRequired()
                 .HasMaxLength(1000);
-        }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer(_conectionContext);
         }
     }
 }
