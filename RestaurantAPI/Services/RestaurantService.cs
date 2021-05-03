@@ -131,15 +131,15 @@ namespace RestaurantAPI.Services
             }
 
             var restaurants = baseQuery
-                        .Skip(query.PageSize - (query.PageNumber - 1))
+                        .Skip(query.PageSize * (query.PageNumber - 1))
                         .Take(query.PageSize)
                         .ToList();
 
             var totalItemsCount = baseQuery.Count();
 
-            var restaurantsDto = _mapper.Map<List<RestaurantDto>>(restaurants);
+            var restaurantsDtos = _mapper.Map<List<RestaurantDto>>(restaurants);
 
-            var result = new PagedResult<RestaurantDto>(restaurantsDto, totalItemsCount, query.PageSize, query.PageNumber);
+            var result = new PagedResult<RestaurantDto>(restaurantsDtos, totalItemsCount, query.PageSize, query.PageNumber);
 
             return result;
         }
